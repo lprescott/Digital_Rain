@@ -20,11 +20,12 @@ function setup() {
   );
   background(0);
   var x = 0;
+  //Populate the entirety of the screen with new streams
   for (var i = 0; i <= width / symbolSize; i++) {
     var stream = new Stream();
     stream.generateSymbols(
       x, 
-      random(-1000, 0)
+      random(-1000, 0) //A random height above the screen for looks
     );
     streams.push(stream);
     x += symbolSize;
@@ -45,7 +46,8 @@ function draw() {
 }
 
 /*
-  The Symbol class
+  The Symbol class defines each 'symbol' as a character with a x, y coordinate.
+  Also a speed, interval to switch and first boolean value.
 */
 function Symbol(x, y, speed, first) {
   this.x = x;
@@ -56,7 +58,8 @@ function Symbol(x, y, speed, first) {
   this.first = first;
 
   /*
-    The setToRandomSymbol function
+    The setToRandomSymbol function changes a symbol class to one of the character codes
+    being used, randomly.
   */
   this.setToRandomSymbol = function() {
     if (frameCount % this.switchInterval == 0) {
@@ -67,7 +70,8 @@ function Symbol(x, y, speed, first) {
   }
 
   /*
-    The rain function
+    The rain function checks if the symbol has reached the bottom, and resets if needed.
+    Else, it continually pushes the symbol down the page.
   */
   this.rain = function() {
     if (this.y >= height) {
@@ -79,7 +83,7 @@ function Symbol(x, y, speed, first) {
 }
 
 /*
-  The Stream class
+  The Stream class is an array of sumbols with a total number and a speed attribute.
 */
 function Stream(){
   this.symbols = [];
@@ -87,7 +91,8 @@ function Stream(){
   this.speed = random(5, 20);
 
   /*
-    The generateSymbols function
+    The generateSymbols function sets all symbols contained in the stream to a randomly
+    generated char code, using setToRandomSymbol.
   */
   this.generateSymbols = function(x, y) {
     var first = round(random(0, 4)) == 1; //Randomly true or false
@@ -103,7 +108,7 @@ function Stream(){
   }
 
   /*
-    The render function
+    The render function calls the necessary functions and thereby renders a stream.
   */
   this.render = function() {
     this.symbols.forEach(function(symbol) {
