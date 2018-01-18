@@ -10,6 +10,7 @@
 var symbolSize = 14;
 var streams = [];
 var fadeInterval = 1.6;
+var input;
 
 /*
   The setup() function is called once when the program starts.
@@ -101,7 +102,7 @@ function Symbol(x, y, speed, first, opacity) {
 function Stream(){
   this.symbols = [];
   this.totalSymbols = round(random(5, 35));
-  this.speed = random(5, 22);
+  this.speed = random(1, 5);
 
   /*
     The generateSymbols function sets all symbols contained in the stream to a randomly
